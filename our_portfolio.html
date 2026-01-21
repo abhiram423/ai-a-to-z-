@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Portfolio | AI A to Z - Showcasing Excellence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .container { width: 90%; max-width: 1250px; margin: auto; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* ===== NAVBAR (Consistent) ===== */
+        .navbar { background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo-text { font-family: 'Montserrat', sans-serif; font-size: 26px; letter-spacing: -1px; }
+        .logo-text span { color: #2563eb; }
+        .logo-text em { color: #ef4444; font-style: normal; }
+        .menu { display: flex; gap: 30px; align-items: center; }
+        .menu li { position: relative; }
+        .menu > li > a { font-weight: 500; color: #475569; font-size: 15px; display: flex; align-items: center; gap: 6px; }
+        .menu > li > a:hover { color: #2563eb; }
+        .v-arrow { font-size: 10px; transition: 0.3s; color: #94a3b8; }
+        .dropdown:hover .v-arrow { transform: rotate(180deg); color: #2563eb; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; background: #fff; min-width: 200px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; border-radius: 10px;
+            padding: 10px 0; border: 1px solid #f1f5f9; margin-top: 15px;
+        }
+        .dropdown-menu li a { padding: 10px 20px; display: block; font-size: 14px; color: #64748b; }
+        .dropdown-menu li a:hover { background: #eff6ff; color: #2563eb; padding-left: 25px; }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .auth-group { display: flex; gap: 10px; }
+        .auth-btn { padding: 9px 22px; border-radius: 8px; font-weight: 600; font-size: 14px; }
+        .login { color: #2563eb; }
+        .signup { background: #2563eb; color: #fff; }
+
+        /* ===== PORTFOLIO HERO ===== */
+        .port-hero {
+            background: #0f172a; color: #fff; padding: 100px 0 60px; text-align: center;
+        }
+        .port-hero h1 { font-size: 44px; font-weight: 800; margin-bottom: 10px; }
+        .port-hero p { color: #94a3b8; font-size: 18px; max-width: 600px; margin: auto; }
+
+        /* ===== PORTFOLIO GRID ===== */
+        .portfolio-section { padding: 80px 0; }
+        .filter-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
+        .tab { padding: 8px 24px; border-radius: 30px; background: #fff; border: 1px solid #e2e8f0; cursor: pointer; font-weight: 500; font-size: 14px; transition: 0.3s; }
+        .tab.active, .tab:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+
+        .port-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .port-card { 
+            background: #fff; border-radius: 20px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; transition: 0.4s;
+        }
+        .port-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        .port-img { height: 220px; background: #cbd5e1; position: relative; overflow: hidden; }
+        .port-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .port-card:hover .port-img img { transform: scale(1.1); }
+        
+        .port-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(37, 99, 235, 0.85); display: flex; align-items: center;
+            justify-content: center; opacity: 0; transition: 0.4s;
+        }
+        .port-card:hover .port-overlay { opacity: 1; }
+        .port-overlay i { color: #fff; font-size: 30px; }
+
+        .port-body { padding: 25px; }
+        .port-tags { display: flex; gap: 8px; margin-bottom: 12px; }
+        .tag { font-size: 11px; padding: 4px 10px; background: #eff6ff; color: #2563eb; border-radius: 4px; font-weight: 700; text-transform: uppercase; }
+        .port-body h3 { font-size: 22px; color: #0f172a; margin-bottom: 10px; font-weight: 700; }
+        .port-body p { font-size: 14px; color: #64748b; margin-bottom: 20px; }
+        .view-project { display: inline-flex; align-items: center; gap: 8px; color: #2563eb; font-weight: 600; font-size: 14px; }
+
+        /* ===== FOOTER (Consistent) ===== */
+        .footer { background: #0f172a; color: #94a3b8; padding: 80px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr; gap: 50px; }
+        .footer h4 { color: #fff; margin-bottom: 25px; font-size: 18px; font-weight: 700; }
+        .social-flex { display: flex; gap: 12px; margin-top: 25px; }
+        .social-flex a { width: 38px; height: 38px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #fff; font-size: 16px; }
+        .social-flex a:hover { background: #2563eb; transform: translateY(-3px); }
+        .footer-links li { margin-bottom: 12px; font-size: 14px; }
+        .footer-links li a:hover { color: #38bdf8; padding-left: 5px; }
+        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .port-grid { grid-template-columns: 1fr; }
+            .filter-tabs { flex-wrap: wrap; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav">
+        <a href="{% url 'main' %}" class="logo-text"><span>AI</span> <em>A to Z</em></a>
+        <ul class="menu">
+            <li><a href="{% url 'main' %}">Home</a></li>
+            <li class="dropdown">
+                <a href="#">About <i class="fa-solid fa-angle-down v-arrow"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'our_portfolio' %}">Our Portfolio</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Courses <i class="fa-solid fa-angle-down v-arrow"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Python</a></li>
+                    <li><a href="#">Artificial Intelligence</a></li>
+                    <li><a href="#">Machine Learning</a></li>
+                    <li><a href="#">Data Science</a></li>
+                    <li><a href="#">Prompt Engineering</a></li>
+                    <li><a href="#">Chatbots</a></li>
+                    <li><a href="#">NLP</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <div class="auth-group">
+            <a class="auth-btn login" href="#">Login</a>
+            <a class="auth-btn signup" href="#">Sign Up</a>
+        </div>
+    </div>
+</nav>
+
+<section class="port-hero">
+    <div class="container">
+        <h1>Our Creative Portfolio</h1>
+        <p>A showcase of the cutting-edge AI solutions and Python applications developed by our team and students.</p>
+    </div>
+</section>
+
+<section class="portfolio-section">
+    <div class="container">
+        
+        <div class="filter-tabs">
+            <div class="tab active">All Courses</div>
+            <div class="tab">Machine Learning</div>
+            <div class="tab">NLP</div>
+            <div class="tab">Chatbots</div>
+        </div>
+
+        <div class="port-grid">
+            
+            <div class="port-card">
+                <div class="port-img">
+                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80" alt="NLP Project">
+                    <div class="port-overlay"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="port-body">
+                    <div class="port-tags"><span class="tag">NLP</span><span class="tag">Python</span></div>
+                    <h3>Smart Sentiment Analyzer</h3>
+                    <p>An AI-powered tool that analyzes customer reviews in real-time to determine emotional sentiment with 98% accuracy.</p>
+                    <a href="#" class="view-project">View Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="port-card">
+                <div class="port-img">
+                    <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=800&q=80" alt="Chatbot Project">
+                    <div class="port-overlay"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="port-body">
+                    <div class="port-tags"><span class="tag">Chatbot</span><span class="tag">AI</span></div>
+                    <h3>Healthcare Assistant Bot</h3>
+                    <p>Advanced symptom-reporting chatbot designed to help patients identify potential risks and schedule appointments automatically.</p>
+                    <a href="#" class="view-project">View Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="port-card">
+                <div class="port-img">
+                    <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&w=800&q=80" alt="ML Project">
+                    <div class="port-overlay"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="port-body">
+                    <div class="port-tags"><span class="tag">ML</span><span class="tag">Data Science</span></div>
+                    <h3>Predictive Sales Model</h3>
+                    <p>A machine learning algorithm that predicts future sales trends based on historical data and seasonal variations.</p>
+                    <a href="#" class="view-project">View Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="port-card">
+                <div class="port-img">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Python Project">
+                    <div class="port-overlay"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="port-body">
+                    <div class="port-tags"><span class="tag">Python</span><span class="tag">Automation</span></div>
+                    <h3>Automated Invoice System</h3>
+                    <p>A fullstack Python application that automates financial record-keeping and invoice generation for small businesses.</p>
+                    <a href="#" class="view-project">View Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container footer-grid">
+        <div>
+            <h4 class="logo-text"><span>AI</span> <em style="color:#fff">A to Z</em></h4>
+            <p>Empowering students with practical, industry-led technical skills to thrive in the era of Artificial Intelligence.</p>
+            <div class="social-flex">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div>
+            <h4>Company</h4>
+            <ul class="footer-links">
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'our_portfolio' %}">Our Portfolio</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Resources</h4>
+            <ul class="footer-links">
+                <li><a href="#">Workshops</a></li>
+                <li><a href="#">Internships</a></li>
+                <li><a href="#">Hackathons</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contact Info</h4>
+            <p><i class="fa fa-location-dot" style="margin-right:10px; color:#2563eb;"></i> Hyderabad, TS</p>
+            <p><i class="fa fa-phone" style="margin-right:10px; color:#2563eb;"></i> +91 8555 8879 86</p>
+            <p><i class="fa fa-envelope" style="margin-right:10px; color:#2563eb;"></i> info@aiatoz.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 AI A to Z | Excellence in AI Training | All Rights Reserved
+    </div>
+</footer>
+
+</body>
+</html>

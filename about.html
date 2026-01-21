@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us | AI A to Z - Leading AI Education</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .container { width: 90%; max-width: 1250px; margin: auto; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* ===== NAVBAR ===== */
+        .navbar { background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo-text { font-family: 'Montserrat', sans-serif; font-size: 26px; letter-spacing: -1px; }
+        .logo-text span { color: #2563eb; }
+        .logo-text em { color: #ef4444; font-style: normal; }
+        .menu { display: flex; gap: 30px; align-items: center; }
+        .menu li { position: relative; }
+        .menu > li > a { font-weight: 500; color: #475569; font-size: 15px; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+        .menu > li > a:hover { color: #2563eb; }
+        
+        .v-arrow { font-size: 10px; transition: 0.3s; color: #94a3b8; }
+        
+        /* DROPDOWN LOGIC - CHANGED TO TOGGLE WITH CLASS */
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; background: #fff; min-width: 200px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            display: none; /* Hidden by default */
+            border-radius: 10px;
+            padding: 10px 0; border: 1px solid #f1f5f9; margin-top: 15px;
+        }
+
+        /* Class to show the menu */
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        /* Class to rotate arrow */
+        .rotate-arrow {
+            transform: rotate(180deg);
+            color: #2563eb;
+        }
+
+        .dropdown-menu li a { padding: 10px 20px; display: block; font-size: 14px; color: #64748b; }
+        .dropdown-menu li a:hover { background: #eff6ff; color: #2563eb; padding-left: 25px; }
+
+        .auth-group { display: flex; gap: 10px; }
+        .auth-btn { padding: 9px 22px; border-radius: 8px; font-weight: 600; font-size: 14px; }
+        .login { color: #2563eb; }
+        .signup { background: #2563eb; color: #fff; }
+
+        /* ===== ABOUT HEADER ===== */
+        .about-hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center;
+            color: #fff; padding: 120px 0 80px; text-align: center;
+        }
+        .about-hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 15px; }
+        .about-hero p { font-size: 18px; color: #cbd5e1; max-width: 700px; margin: auto; }
+
+        /* ===== MISSION SECTION ===== */
+        .mission { padding: 100px 0; }
+        .mission-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+        .mission-img { position: relative; }
+        .mission-img img { width: 100%; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .mission-img::after {
+            content: ''; position: absolute; top: -20px; left: -20px; width: 100px; height: 100px;
+            background: #2563eb; border-radius: 20px; z-index: -1;
+        }
+        .mission-content h2 { font-size: 36px; color: #0f172a; margin-bottom: 25px; font-weight: 800; }
+        .mission-content p { color: #64748b; margin-bottom: 20px; font-size: 17px; }
+        .stat-flex { display: flex; gap: 40px; margin-top: 40px; }
+        .stat-item h3 { font-size: 32px; color: #2563eb; font-weight: 800; }
+        .stat-item p { font-size: 14px; font-weight: 600; color: #94a3b8; }
+
+        /* ===== WHY CHOOSE US ===== */
+        .features { padding: 100px 0; background: #fff; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 36px; color: #0f172a; font-weight: 800; }
+        .section-title div { width: 60px; height: 4px; background: #ef4444; margin: 15px auto; border-radius: 2px; }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .feature-card {
+            padding: 40px 30px; border-radius: 20px; background: #f8fafc;
+            border: 1px solid #f1f5f9; transition: 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-10px); background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: #2563eb; }
+        .feature-card i { font-size: 35px; color: #2563eb; margin-bottom: 20px; display: block; }
+        .feature-card h4 { font-size: 20px; margin-bottom: 12px; color: #1e293b; }
+        .feature-card p { font-size: 15px; color: #64748b; }
+
+        /* ===== FOOTER ===== */
+        .footer { background: #0f172a; color: #94a3b8; padding: 80px 0 30px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr; gap: 50px; }
+        .footer h4 { color: #fff; margin-bottom: 25px; font-size: 18px; font-weight: 700; }
+        .social-flex { display: flex; gap: 12px; margin-top: 25px; }
+        .social-flex a { width: 38px; height: 38px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #fff; font-size: 16px; }
+        .social-flex a:hover { background: #2563eb; transform: translateY(-3px); }
+        .footer-links li { margin-bottom: 12px; font-size: 14px; }
+        .footer-links li a:hover { color: #38bdf8; padding-left: 5px; }
+        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .mission-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-hero h1 { font-size: 32px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav">
+        <a href="{% url 'main' %}" class="logo-text"><span>AI</span> <em>A to Z</em></a>
+        <ul class="menu">
+            <li><a href="{% url 'main' %}">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">About <i class="fa-solid fa-angle-down v-arrow"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'our_portfolio' %}">Our Portfolio</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Courses <i class="fa-solid fa-angle-down v-arrow"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Python</a></li>
+                    <li><a href="#">Artificial Intelligence</a></li>
+                    <li><a href="#">Machine Learning</a></li>
+                    <li><a href="#">Data Science</a></li>
+                    <li><a href="#">Prompt Engineering</a></li>
+                    <li><a href="#">Chatbots</a></li>
+                    <li><a href="#">NLP</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <div class="auth-group">
+            <a class="auth-btn login" href="#">Login</a>
+            <a class="auth-btn signup" href="#">Sign Up</a>
+        </div>
+    </div>
+</nav>
+
+<section class="about-hero">
+    <div class="container">
+        <h1>Transforming Education with AI</h1>
+        <p>We are a team of tech enthusiasts dedicated to bridging the gap between traditional learning and modern technology.</p>
+    </div>
+</section>
+
+<section class="mission">
+    <div class="container mission-grid">
+        <div class="mission-img">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Team Work">
+        </div>
+        <div class="mission-content">
+            <h2>Our Mission & Vision</h2>
+            <p>At AI A to Z, we believe that high-quality tech education should be accessible to everyone. Our platform is designed to provide hands-on, practical learning that actually matters in the real world.</p>
+            <p>Whether you are a student starting your journey or a professional looking to upscale, our curated curriculum in Python, Machine Learning, and Gen-AI ensures you stay ahead of the curve.</p>
+            
+            <div class="stat-flex">
+                <div class="stat-item">
+                    <h3>10k+</h3>
+                    <p>Students Trained</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Expert Mentors</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Practical Based</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Choose AI A to Z?</h2>
+            <div></div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h4>Industry Curriculum</h4>
+                <p>Our courses are designed by industry experts to meet current job market demands.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-laptop-code"></i>
+                <h4>LMS Based Learning</h4>
+                <p>Track your progress, take quizzes, and earn certificates through our advanced LMS.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users-viewfinder"></i>
+                <h4>Mentorship</h4>
+                <p>Get direct support from mentors who are working as fullstack developers and AI engineers.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-certificate"></i>
+                <h4>Certifications</h4>
+                <p>Get recognized for your skills with verified certificates upon course completion.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container footer-grid">
+        <div>
+            <h4 class="logo-text"><span>AI</span> <em style="color:#fff">A to Z</em></h4>
+            <p>Empowering students with practical, industry-led technical skills to thrive in the era of Artificial Intelligence.</p>
+            <div class="social-flex">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div>
+            <h4>Company</h4>
+            <ul class="footer-links">
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'our_portfolio' %}">Our Portfolio</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Resources</h4>
+            <ul class="footer-links">
+                <li><a href="#">Workshops</a></li>
+                <li><a href="#">Internships</a></li>
+                <li><a href="#">Hackathons</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contact Info</h4>
+            <p><i class="fa fa-location-dot" style="margin-right:10px; color:#2563eb;"></i> Hyderabad, TS</p>
+            <p><i class="fa fa-phone" style="margin-right:10px; color:#2563eb;"></i> +91 8555 8879 86</p>
+            <p><i class="fa fa-envelope" style="margin-right:10px; color:#2563eb;"></i> info@aiatoz.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 AI A to Z | Excellence in AI Training | All Rights Reserved
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('.dropdown-toggle').forEach(dropdown => {
+        dropdown.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent jump to top of page
+            
+            const menu = this.nextElementSibling;
+            const arrow = this.querySelector('.v-arrow');
+            
+            // Toggle active class on menu
+            menu.classList.toggle('active');
+            
+            // Toggle rotation on arrow
+            arrow.classList.toggle('rotate-arrow');
+            
+            // Close other open dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                if (otherMenu !== menu) {
+                    otherMenu.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.v-arrow').forEach(otherArrow => {
+                if (otherArrow !== arrow) {
+                    otherArrow.classList.remove('rotate-arrow');
+                }
+            });
+        });
+    });
+
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function (e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            document.querySelectorAll('.v-arrow').forEach(arrow => {
+                arrow.classList.remove('rotate-arrow');
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
